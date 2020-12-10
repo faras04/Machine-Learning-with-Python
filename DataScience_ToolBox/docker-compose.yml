@@ -1,13 +1,20 @@
 version: '2'
 services:  
       
-  portainer:
-    image: portainer/portainer
+  jupyter_scipy:
+    image: jupyter/scipy-notebook:2c80cf3537ca
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./portainer-data:/data
+      - "$PWD":/jupyter-work:/work
         # Enable you to access potainers web interface from your host machine
-        # using http://localhost:10001
+        # using http://localhost:8888
     ports:
-      - "10001:9000"
- 
+      - "8888:8888"
+	  
+  jupyter_all_spark:
+    image: jupyter/all-spark-notebook
+    volumes:
+      - "$PWD":/jupyter-work:/work
+        # Enable you to access potainers web interface from your host machine
+        # using http://localhost:8888
+    ports:
+      - "8889:8888"
